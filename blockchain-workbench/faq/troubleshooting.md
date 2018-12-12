@@ -61,5 +61,8 @@ This error is usually seen when the function has hit a revert/assert given the c
 ##### "Error while estimating gas. Exception Invalid params: Invalid hex: Invalid character '_' at position ..."
 This error comes from the usage of [libraries](https://solidity.readthedocs.io/en/v0.4.21/contracts.html#libraries). We do not support libraries in the current version of Workbench. Please move the functions from the library into your contract. 
 
-##### "Input string was not in a correct format."
-This error is usually due to a parsing error of the messaging input. Most commonly, this occurs when the parameter is a string that represents a float (ex. "1.55"). We do not support floats. Please convert your input to an integer value (ex. "2").
+##### "<...> could not be parsed into <...>"
+This error is usually due to a parsing error of the messaging input. For example, if the error was "12.3 could not be parsed into uint256.", it means that you are supplying a float instead of the expected int. We do not support floats - please convert your input to an integer value (ex. "12").
+
+##### "<...> could not be parsed into <...>. Parameter length exceeded the maximum number of bits for the field: <..>. Actual Length: <...>"
+This error means that the int value you passed in is too large for the specified parameter type. For example, if the parameter expects a uint8, any number greater than 255 would overflow, causing this error. Please fix the input to fit the parameter type or change the parameter type.
